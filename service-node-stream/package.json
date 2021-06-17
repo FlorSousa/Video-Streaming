@@ -1,0 +1,20 @@
+{
+  "name": "service-node-stream",
+  "version": "0.0.1",
+  "description": "streaming serve to microservice",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlorSousa/Video-Streaming.git"
+  },
+  "author": "FlorSousa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FlorSousa/Video-Streaming/issues"
+  },
+  "homepage": "https://github.com/FlorSousa/Video-Streaming#readme"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "service-node-postgresql",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm start",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connection-manager": "^1.0.5",
+    "mysql-connection-manager": "0.0.14",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
+}
