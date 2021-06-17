@@ -8,4 +8,10 @@ app.get('/videos', async(req,res)=>{
     res.send(Results)
 })
 
+app.get('/videos/details/:idVideo', async(req,res)=>{
+    const idVideo = req.params.idVideo
+    const Result = await Videos.findAll({where:{codeVideo:idVideo}})
+    res.send(Result)
+})
+
 app.listen(3005)
