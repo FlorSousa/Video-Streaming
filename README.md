@@ -16,4 +16,6 @@
   <label>A rota /videos/details precisa do id de video para retornar detalhes do mesmo</label>
   <br></br>
   <label>O banco de dados Postgress é acessado pelo Sequelize</label>
+  <br></br>
+  <h2>Serviço node-stream</h2>
   
