@@ -14,6 +14,9 @@ const Videos = sequelize.define('videos', {
     },
     autor:{
         type: Sequelize.STRING(100)
+    },
+    codeVideo:{
+        type: Sequelize.STRING(300)
     }
 })
 
