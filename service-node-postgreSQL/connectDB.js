@@ -1,16 +1,14 @@
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('videosDB','root','senha',{
+const sequelize = new Sequelize('videosDB','YOUR_USER','PASSWORD',{
     host:'localhost',
-    dialect:'mysql'
+    port:'5000',
+    dialect:'postgres'
 })
 
 const Videos = sequelize.define('videos', {
     titulo:{
         type:Sequelize.STRING(200)
-    },
-    data:{
-        type: Sequelize.DATE
     },
     autor:{
         type: Sequelize.STRING(100)
