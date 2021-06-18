@@ -12,6 +12,8 @@
 <h1>Algoritmo</h1>
   <h2>Serviço Node-PostgreSQL</h2>
   <label>Ao acessar a rota /videos é retornado os 100 primeiros videos do banco de dados</label>
+  <br></br>
   <label>A rota /videos/details precisa do id de video para retornar detalhes do mesmo</label>
+  <br></br>
   <label>O banco de dados Postgress é acessado pelo Sequelize</label>
   
