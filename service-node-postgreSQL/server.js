@@ -11,17 +11,28 @@ app.use(express.urlencoded({
 
 function codeGen(){
  //gerar codigo aleatorio para video   
+ caract = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
+    'r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'#','%','$','@','!']
+    key =''
+    
+    for(let cont = 0;cont<11;cont++){
+        number = Math.floor(Math.random() * caract.length);
+        key+= caract[number]
+    }
+    return key
 }
 
 app.post('/videos/add', async(req,res)=>{
-    infos ={titulo:req.express.titulo, autor: req.express.auto, codeVideo: req.express.codeVideo}
+    infos ={titulo:req.body.titulo, autor: req.body.autor, codeVideo: codeGen()}
     const dbRetorno = await Videos.findOne({where:{codeVideo:infos.codeVideo}})
+    const dbRetorno_titulo = await Videos.findOne({where:{titulo:infos.titulo}})
    
-    if(dbRetorno == null){
+    if(dbRetorno == null && dbRetorno_titulo == null){
         const novo = Videos.build({titulo:infos.titulo,autor:infos.autor,codeVideo:infos.codeVideo})
         try{
             novo.save()
-            console.log("A new data in postgreSQL DB")
+            res.send({"MSG":"OK"})
+            
         }catch(err){
             console.log(err)
             res.send({"MSG":"Something are wrong"})
@@ -30,7 +41,6 @@ app.post('/videos/add', async(req,res)=>{
     else{
         res.send({"MSG":"Try again"})
     }
-
 
 })
 
