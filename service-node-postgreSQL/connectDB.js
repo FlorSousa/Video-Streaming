@@ -15,6 +15,9 @@ const Videos = sequelize.define('videos', {
     },
     codeVideo:{
         type: Sequelize.STRING(300)
+    },
+    path:{
+        type: Sequelize.STRING(300)
     }
 })
 
