@@ -1,13 +1,19 @@
 const express = require('express')
 const app = express()
-const pathvideos = "C:/Users/getui/Desktop/videos"
-const videoProcessor = require("./videoProcessor")
+const fs = require("fs");
+const fetch = require('node-fetch')
 
-app.get('/videos/assistir/:idVideo', (req,res)=>{
-    idVideo = req.params.idVideo
-    videoPath = pathvideos+idVideo
-    VideoProcessor = new videoProcessor(videoPath)
-    
+app.get('/videos/assistir/:idVideo', async (req,res)=>{
+  code = req.params.idVideo
+  const response = await fetch(`http://localhost:3005/videos/check/${code}`)
+  const videoPath = await response.json()
+  if(videoPath === "INVALID KEY"){
+    res.json("TRY ANOTHER KEY")
+  }
+  else{
+    //process video
+  }
 })
+
 
 app.listen(3000)

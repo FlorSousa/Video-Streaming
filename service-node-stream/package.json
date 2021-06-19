@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/FlorSousa/Video-Streaming/issues"
   },
-  "homepage": "https://github.com/FlorSousa/Video-Streaming#readme"
+  "homepage": "https://github.com/FlorSousa/Video-Streaming#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
 }
