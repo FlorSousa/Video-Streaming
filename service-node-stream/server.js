@@ -17,7 +17,6 @@ const storage = multer.diskStorage({
 let upload = multer({storage})
 
 
-
 app.get('/videos/watch/:idVideo', async (req,res)=>{
   code = req.params.idVideo
   const response = await fetch(`http://localhost:3005/videos/check/${code}`)
@@ -76,7 +75,24 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
 })
 
 app.post('/upload',upload.single("file"),async(req,res)=>{
-     res.json("oi")
+  const titulo = req.body.titulo
+  const autor = req.body.autor
+  const response = await fetch(`http://localhost:3005/videos/upload`,{
+    method: 'POST',
+    headers:{
+      'Accept':'application/json',
+      'Content-Type':'application/json',
+    },
+    body: JSON.stringify({titulo:titulo,autor:autor})
+  })
+  const json = await response.json()
+  if(json.MSG == "OK"){
+      res.send("Working")
+  }
+  else{
+    res.send("Bug")
+  }
+  
 })
 
 app.get('/', (req,res)=>{
