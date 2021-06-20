@@ -9,8 +9,8 @@ app.use(express.urlencoded({
     extended:true
 }))
 
+//gerar codigo aleatorio para video   
 function codeGen(){
- //gerar codigo aleatorio para video   
     
     caract = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
     'r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'#','$','@','!']
@@ -24,7 +24,8 @@ function codeGen(){
     return key
 }
 
-app.post('/videos/add', async(req,res)=>{
+//rota para upload de video
+app.post('/videos/upload', async(req,res)=>{
     code = codeGen()
     titulo = req.body.titulo
     path = path_videos+"/"+code+titulo
@@ -36,25 +37,26 @@ app.post('/videos/add', async(req,res)=>{
         const novo = Videos.build({titulo:infos.titulo,autor:infos.autor,codeVideo:infos.codeVideo,path:path})
         try{
             novo.save()
-            res.send({"MSG":"OK"})
+            res.json({"MSG":"OK"})
             
         }catch(err){
             console.log(err)
-            res.send({"MSG":"Something are wrong"})
+            res.json({"MSG":"Something are wrong"})
         }
     }
     else{
-        res.send({"MSG":"Try again"})
+        res.json({"MSG":"Try again"})
     }
 
 })
 
-
+//retorna todos os videos do db
 app.get('/videos', async(req,res)=>{
     const Results = await Videos.findAll()
     res.send(Results)
 })
 
+//verifica se o video existe no banco de dados
 app.get('/videos/check/:idVideo', async(req,res)=>{
     const code = req.params.idVideo
     const Result = await Videos.findOne({where:{codeVideo:code}})
@@ -68,6 +70,7 @@ app.get('/videos/check/:idVideo', async(req,res)=>{
 
 })
 
+//retorna os detalhe do video
 app.get('/videos/details/:idVideo', async(req,res)=>{
     const idVideo = req.params.idVideo
     console.log(idVideo)
