@@ -2,8 +2,21 @@ const express = require('express')
 const app = express()
 const fs = require("fs");
 const fetch = require('node-fetch')
-var multer  = require('multer')
-var upload = multer({ dest: 'C:/Users/getui/Desktop/Videos' })
+var multer  = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb) =>{
+      cb(null,'C:/Users/getui/Desktop/Videos')
+  },
+  filename: (req,file,cb)=>{
+    cb(null,file.originalname + path.extname(file.originalname))
+  }
+})
+
+let upload = multer({storage})
+
+
 
 app.get('/videos/watch/:idVideo', async (req,res)=>{
   code = req.params.idVideo
@@ -63,7 +76,7 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
 })
 
 app.post('/upload',upload.single("file"),async(req,res)=>{
-     res.send("oi")
+     res.json("oi")
 })
 
 app.get('/', (req,res)=>{

@@ -2,3 +2,4 @@ service-node-postgreSQL/node_modules
 service-node-postgreSQL/back.js
 service-node-postgreSQL/connectDB.js
 service-node-stream/node_modules/
+service-node-stream/index.html
