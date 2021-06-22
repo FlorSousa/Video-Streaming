@@ -4,17 +4,32 @@ const fs = require("fs");
 const fetch = require('node-fetch')
 var multer  = require('multer');
 const path = require('path');
-
+let atual
 const storage = multer.diskStorage({
   destination: (req,file,cb) =>{
       cb(null,'C:/Users/getui/Desktop/Videos')
   },
   filename: (req,file,cb)=>{
-    cb(null,file.originalname + path.extname(file.originalname))
+    cb(null,geraCodigo()+'.jpg')
   }
 })
 
 let upload = multer({storage})
+
+function geraCodigo(){    
+    caract = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
+    'r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'#','$','@','!']
+    
+    key =''
+    
+    for(let cont = 0;cont<11;cont++){
+        number = Math.floor(Math.random() * caract.length);
+        key+= caract[number]
+    }
+    atual = key
+    return key
+
+}
 
 
 app.get('/videos/watch/:idVideo', async (req,res)=>{
@@ -77,24 +92,27 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
 app.post('/upload',upload.single("file"),async(req,res)=>{
   const titulo = req.body.titulo
   const autor = req.body.autor
+  const code = atual
+  atual = ''
   const response = await fetch(`http://localhost:3005/videos/upload`,{
     method: 'POST',
     headers:{
       'Accept':'application/json',
       'Content-Type':'application/json',
     },
-    body: JSON.stringify({titulo:titulo,autor:autor})
+    body: JSON.stringify({titulo:titulo,autor:autor,code:code})
   })
   const json = await response.json()
   if(json.MSG == "OK"){
-      res.send("Working")
+      res.json("Working")
   }
   else{
-    res.send("Bug")
+    res.json("Bug")
   }
-  
+
 })
 
+//testar requisições
 app.get('/', (req,res)=>{
   res.sendFile(__dirname+"/index.html")
 })

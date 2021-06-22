@@ -9,27 +9,14 @@ app.use(express.urlencoded({
     extended:true
 }))
 
-//gerar codigo aleatorio para video   
-function codeGen(){
-    
-    caract = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
-    'r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'#','$','@','!']
-    
-    key =''
-    
-    for(let cont = 0;cont<11;cont++){
-        number = Math.floor(Math.random() * caract.length);
-        key+= caract[number]
-    }
-    return key
-}
 
 //rota para upload de video
 app.post('/videos/upload', async(req,res)=>{
-    code = codeGen()
+    code = req.body.code
     titulo = req.body.titulo
-    path = path_videos+"/"+code+titulo
+    path = path_videos+"/"+code
     infos ={titulo:titulo, autor: req.body.autor, codeVideo: code,path:path}
+    console.log(infos)
     const dbRetorno = await Videos.findOne({where:{codeVideo:infos.codeVideo}})
     const dbRetorno_titulo = await Videos.findOne({where:{titulo:infos.titulo}})
    
