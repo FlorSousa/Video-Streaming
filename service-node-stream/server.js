@@ -4,7 +4,11 @@ const fs = require("fs");
 const fetch = require('node-fetch')
 var multer  = require('multer');
 const path = require('path');
+
+//variavel global que guarda o codigo gerado no multer
 let atual
+
+//informações para o multer
 const storage = multer.diskStorage({
   destination: (req,file,cb) =>{
       cb(null,'C:/Users/getui/Desktop/Videos')
@@ -14,8 +18,10 @@ const storage = multer.diskStorage({
   }
 })
 
+//instancia do multer
 let upload = multer({storage})
 
+//função que gera codigo aleatorio
 function geraCodigo(){    
     caract = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
     'r','s','t','u','v','w','x','y','z',1,2,3,4,5,6,7,8,9,0,'#','$','@','!']
@@ -31,9 +37,10 @@ function geraCodigo(){
 
 }
 
-
+//rota de streaming
 app.get('/videos/watch/:idVideo', async (req,res)=>{
   code = req.params.idVideo
+  //verifica se o video existe
   const response = await fetch(`http://localhost:3005/videos/check/${code}`)
   const path_do_video= await response.json()
   if(path_do_video=== "INVALID KEY"){
@@ -89,6 +96,9 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
   }
 })
 
+
+//rota de upload
+//a requisição passa pelo middlewware multer e passa o codigo gerado para o service ligado ao postgres
 app.post('/upload',upload.single("file"),async(req,res)=>{
   const titulo = req.body.titulo
   const autor = req.body.autor
@@ -116,4 +126,5 @@ app.post('/upload',upload.single("file"),async(req,res)=>{
 app.get('/', (req,res)=>{
   res.sendFile(__dirname+"/index.html")
 })
+
 app.listen(3000)
