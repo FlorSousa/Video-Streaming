@@ -4,9 +4,7 @@
   <ul>
     <li>Node</li>
     <li>PostgreSQL</li>
-    <li>Docker</li>
-    <li>Django</li>
-    <li>Neo4j</li>  
+    <li>Docker</li> 
   </ul>
 
   
