@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
       cb(null,'C:/Users/getui/Desktop/Videos')
   },
   filename: (req,file,cb)=>{
-    cb(null,geraCodigo()+'.jpg')
+    cb(null,geraCodigo()+'.mp4')
   }
 })
 
@@ -39,10 +39,11 @@ function geraCodigo(){
 
 //rota de streaming
 app.get('/videos/watch/:idVideo', async (req,res)=>{
-  code = req.params.idVideo
+  let str = req.params.idVideo.split(" ")
+  let code = str[0]
   //verifica se o video existe
   const response = await fetch(`http://localhost:3005/videos/check/${code}`)
-  const path_do_video= await response.json()
+  const path_do_video= await response.json() + ".mp4"
   if(path_do_video=== "INVALID KEY"){
     res.json("TRY ANOTHER KEY")
   }
@@ -100,9 +101,9 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
 //rota de upload
 //a requisição passa pelo middlewware multer e passa o codigo gerado para o service ligado ao postgres
 app.post('/upload',upload.single("file"),async(req,res)=>{
-  const titulo = req.body.titulo
-  const autor = req.body.autor
-  const code = atual
+  let titulo = req.body.titulo
+  let autor = req.body.autor
+  let code = atual
   atual = ''
   const response = await fetch(`http://localhost:3005/videos/upload`,{
     method: 'POST',
@@ -114,7 +115,7 @@ app.post('/upload',upload.single("file"),async(req,res)=>{
   })
   const json = await response.json()
   if(json.MSG == "OK"){
-      res.status(200).json({MSG:"WORKING"})
+      res.status(200).json({MSG:"WORKING",LINK:"/"})
   }
   else{
     res.json("Bug")
