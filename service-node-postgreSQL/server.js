@@ -37,6 +37,26 @@ app.post('/videos/upload', async(req,res)=>{
 
 })
 
+//rota exclui do db
+app.get('/videos/delete/:idVideo', async(req,res)=>{
+    let code = req.params.idVideo
+    const options = {where:{codeVideo:code}}
+    const results = await Videos.findOne({options})
+    if(results !== null){
+        try{
+            const Operation = await Videos.destroy(options)
+            res.sendStatus(200).json("DELETED")
+        }
+        catch(err){
+            res.sendStatus(500).json(err)
+        }
+        
+    }
+    else{
+        res.json({MSG:"THIS VIDEO NOT EXIST"})
+    }
+})
+
 //retorna todos os videos do db
 app.get('/videos', async(req,res)=>{
     const Results = await Videos.findAll()

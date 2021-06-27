@@ -36,6 +36,15 @@ function geraCodigo(){
     return key
 
 }
+//rota de excluir
+app.get('/videos/delete/:idVideo', async (req,res)=>{
+    let code = req.params.idVideo
+    const response = await fetch(`http://localhost:3005/videos/check/${code}`)
+    const path = await response.json()
+    if(path !== "INVALID KEY"){
+      
+    }
+  })
 
 //rota de streaming
 app.get('/videos/watch/:idVideo', async (req,res)=>{
