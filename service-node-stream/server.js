@@ -114,17 +114,12 @@ app.post('/upload',upload.single("file"),async(req,res)=>{
   })
   const json = await response.json()
   if(json.MSG == "OK"){
-      res.json("Working")
+      res.status(200).json({MSG:"WORKING"})
   }
   else{
     res.json("Bug")
   }
 
-})
-
-//testar requisições
-app.get('/', (req,res)=>{
-  res.sendFile(__dirname+"/index.html")
 })
 
 app.listen(3000)
