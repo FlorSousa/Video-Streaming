@@ -1,5 +1,5 @@
 <h1> Video-Streaming </h1>
-<h2>Sistema de exemplo, microservices com Node e Django</h2>
+<h4>Sistema de exemplo, microservices com Node e Django</h4>
   <label>Lista de tecnologias</label>
   <ul>
     <li>Node</li>
