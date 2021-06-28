@@ -1,4 +1,7 @@
 <h1> Video-Streaming </h1>
+
+![GitHub last commit](https://img.shields.io/github/last-commit/FlorSousa/Video-Streaming)
+![GitHub Repo stars](https://img.shields.io/github/stars/FlorSousa/Video-Streaming?style=social)
 <h4>Sistema de exemplo de um streaming, com arquitetura de microservices usando Node.js</h4>
   <label>Lista de tecnologias</label>
   <ul>
