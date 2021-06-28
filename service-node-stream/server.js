@@ -132,7 +132,7 @@ app.post('/upload',upload.single("file"),async(req,res)=>{
   })
   const json = await response.json()
   if(json.MSG == "OK"){
-      res.status(200).json({MSG:"WORKING",LINK:"/"})
+      res.status(200).json({MSG:"WORKING",LINK:`/watch/${code}`})
   }
   else{
     res.json("Bug")
