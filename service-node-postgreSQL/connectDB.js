@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-
+console.log("passou")
 const sequelize = new Sequelize('videosDB','postgres','jfs123',{
     host:'localhost',
     port:'5000',

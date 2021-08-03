@@ -8,6 +8,7 @@ const path = require('path');
 //variavel global que guarda o codigo gerado no multer
 let atual
 
+
 //informações para o multer
 const storage = multer.diskStorage({
   destination: (req,file,cb) =>{
