@@ -1,0 +1,2 @@
+CREATE videosDB
+USE videosDB
