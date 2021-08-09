@@ -1,2 +1,1 @@
-CREATE videosDB
-USE videosDB
+CREATE DATABASE videosDB

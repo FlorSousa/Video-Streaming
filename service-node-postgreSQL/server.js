@@ -12,10 +12,10 @@ app.use(express.urlencoded({
 
 //rota para upload de video
 app.post('/videos/upload', async(req,res)=>{
-    code = req.body.code
-    titulo = req.body.titulo
-    path = path_videos+"/"+code
-    infos ={titulo:titulo, autor: req.body.autor, codeVideo: code,path:path}
+    let code = req.body.code
+    let titulo = req.body.titulo
+    let path = path_videos+"/"+code
+    let infos ={titulo:titulo, autor: req.body.autor, codeVideo: code,path:path}
     console.log(infos)
     const dbRetorno = await Videos.findOne({where:{codeVideo:infos.codeVideo}})
     const dbRetorno_titulo = await Videos.findOne({where:{titulo:infos.titulo}})
@@ -44,7 +44,7 @@ app.get('/videos/delete/:idVideo', async(req,res)=>{
     const results = await Videos.findOne({options})
     if(results !== null){
         try{
-            const Operation = await Videos.destroy(options)
+            await Videos.destroy(options)
             res.sendStatus(200).json("DELETED")
         }
         catch(err){
@@ -68,7 +68,7 @@ app.get('/videos/check/:idVideo', async(req,res)=>{
     const code = req.params.idVideo
     const Result = await Videos.findOne({where:{codeVideo:code}})
     if(Result !== null){
-        out = Result.dataValues.path
+        let out = Result.dataValues.path
         res.json(out)
     }
     else{
