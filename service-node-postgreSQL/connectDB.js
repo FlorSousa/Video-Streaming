@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize')
 console.log("passou")
-const sequelize = new Sequelize('videosDB','postgres','jfs123',{
-    host:'localhost',
-    port:'5000',
+const sequelize = new Sequelize('videosDB','host','jfs123',{
+    host:'container_banco',
+    port:'5432',
     dialect:'postgres'
 })
 

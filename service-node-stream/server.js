@@ -12,7 +12,7 @@ let atual
 //informações para o multer
 const storage = multer.diskStorage({
   destination: (req,file,cb) =>{
-      cb(null,'C:/Users/getui/Desktop/Videos')
+      cb(null,'/Videos')
   },
   filename: (req,file,cb)=>{
     cb(null,geraCodigo()+'.mp4')
@@ -119,6 +119,7 @@ app.get('/videos/watch/:idVideo', async (req,res)=>{
 //rota de upload
 //a requisição passa pelo middlewware multer e passa o codigo gerado para o service ligado ao postgres
 app.post('/upload',upload.single("file"),async(req,res)=>{
+  console.log("vrau")
   let titulo = req.body.titulo
   let autor = req.body.autor
   let code = atual
